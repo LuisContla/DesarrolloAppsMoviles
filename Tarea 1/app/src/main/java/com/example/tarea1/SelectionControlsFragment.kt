@@ -1,59 +1,79 @@
-package com.example.tarea1
+package com.example.tarea1 // O tu paquete
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
+import com.example.tarea1.databinding.FragmentSelectionControlsBinding // Importa tu ViewBinding generado
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [SelectionControlsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SelectionControlsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentSelectionControlsBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_selection_controls, container, false)
+    ): View {
+        _binding = FragmentSelectionControlsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SelectionControlsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SelectionControlsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // CheckBox
+        binding.checkboxOption1.setOnCheckedChangeListener { _, isChecked ->
+            showToast("Checkbox Opción 1: ${if (isChecked) "Seleccionado" else "Deseleccionado"}")
+        }
+        binding.checkboxOption2.setOnCheckedChangeListener { _, isChecked ->
+            showToast("Checkbox Opción 2: ${if (isChecked) "Seleccionado" else "Deseleccionado"}")
+        }
+
+        // RadioGroup
+        binding.radioGroupOptions.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
+                R.id.radioButtonA -> showToast("Radio: Opción A seleccionada")
+                R.id.radioButtonB -> showToast("Radio: Opción B seleccionada")
+                R.id.radioButtonC -> showToast("Radio: Opción C seleccionada")
+            }
+        }
+
+        // Switch
+        binding.switchEnableFeature.setOnCheckedChangeListener { _, isChecked ->
+            showToast("Switch Funcionalidad: ${if (isChecked) "Activada" else "Desactivada"}")
+            binding.textViewSwitchStatus.text = if (isChecked) "Funcionalidad Activada" else "Funcionalidad Desactivada"
+        }
+
+        // Spinner
+        val spinnerItems = listOf("Selecciona una fruta", "Manzana", "Banana", "Naranja", "Uva")
+        val spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerItems)
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerFruit.adapter = spinnerAdapter
+
+        binding.spinnerFruit.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                if (position > 0) { // Evitar el Toast para el item "Selecciona una fruta"
+                    val selectedFruit = parent?.getItemAtPosition(position).toString()
+                    showToast("Spinner: $selectedFruit seleccionada")
                 }
             }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // No es necesario para este ejemplo
+            }
+        }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
