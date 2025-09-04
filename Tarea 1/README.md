@@ -52,16 +52,16 @@ La aplicación busca reforzar la comprensión de los principios de diseño modul
 
 ## 📸 Capturas de Funcionamiento  
 - **ButtonsFragment**  
-  ![ButtonsFragment](Capturas/ButtonsFragment.png)  
+  <img src="Capturas/ButtonsFragment.png" width="400"/>  
 
 - **ListsFragment**  
-  ![ListsFragment](Capturas/ListsFragment.png)  
+  <img src="Capturas/ListsFragment.png" width="400"/>  
 
 - **InfoElementsFragment**  
-  ![InfoElementsFragment](Capturas/InfoElementsFragment.png)  
+  <img src="Capturas/InfoElementsFragment.png" width="400"/>  
 
 - **SelectionControlsFragment**  
-  ![SelectionControlsFragment](Capturas/SelectionControlsFragment.png)  
+  <img src="Capturas/SelectionControlsFragment.png" width="400"/>  
 
 - **TextFieldsFragment**  
-  ![TextFieldsFragment](Capturas/TextFieldsFragment.png)  
+  <img src="Capturas/TextFieldsFragment.png" width="400"/>  
