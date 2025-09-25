@@ -50,7 +50,7 @@ La aplicación busca reforzar la comprensión de los principios de diseño modul
 
 ---
 
-## 📸 Capturas de Funcionamiento  
+## 📸 Capturas de Funcionamiento Kotlin  
 - **ButtonsFragment**  
   <img src="Capturas/ButtonsFragment.png" width="400"/>  
 

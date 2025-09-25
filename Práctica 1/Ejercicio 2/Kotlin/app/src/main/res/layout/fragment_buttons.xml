@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ButtonsFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tipos de Botones"
+            android:textSize="20sp"
+            android:layout_marginBottom="24dp"/>
+
+        <Button
+            android:id="@+id/buttonStandard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Botón Estándar"
+            android:layout_marginBottom="16dp"/>
+
+        <Button
+            android:id="@+id/buttonOutlined"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Botón Contorneado"
+            android:layout_marginBottom="16dp"/>
+
+        <Button
+            android:id="@+id/buttonText"
+            style="?attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Botón de Texto"
+            android:layout_marginBottom="24dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MaterialButtonToggleGroup"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"/>
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/buttonToggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleSelection="true"
+            app:checkedButton="@+id/buttonToggleCenter"
+            android:layout_marginBottom="24dp">
+            <Button
+                android:id="@+id/buttonToggleLeft"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Izq."/>
+            <Button
+                android:id="@+id/buttonToggleCenter"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cen."/>
+            <Button
+                android:id="@+id/buttonToggleRight"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Der."/>
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="16dp"
+            app:srcCompat="@android:drawable/ic_input_add"
+            android:contentDescription="Añadir"/>
+
+    </LinearLayout>
+</ScrollView>
