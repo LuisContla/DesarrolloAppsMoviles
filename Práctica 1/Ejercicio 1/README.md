@@ -7,30 +7,33 @@ Instalar y configurar las herramientas esenciales para el desarrollo de aplicaci
 
 ## 🧰 Herramientas a Instalar
 
-- IDE para desarrollo Android. Incluye un emulador que debes configurar y probar.
-- Distribución gratuita de :contentReference[oaicite:3]{index=3}. Necesaria para compilar y ejecutar proyectos Java.
-- Automatiza la construcción de proyectos y gestiona dependencias.
-- Control de versiones. Configúralo con tu usuario y correo electrónico.
-- Crea una cuenta y un repositorio público para tus proyectos del curso.
-- Utilizado para la gestión de bases de datos (reemplaza XAMPP).
-- Entorno de ejecución de JavaScript del lado del servidor.
-- Framework para desarrollo móvil multiplataforma.
+- Andorid Studio
+- Java Development Kit (JDK)
+- Maven
+- Git
+- GitHub
+- Docker
+- Node.js
+- Flutter
 
 ---
 
-## ⚙️ Cómo Ejecutar el Programa de Prueba
+## 📸 Evidencias
 
-1. Abre **Android Studio** y crea un nuevo proyecto vacío.
-2. Selecciona el tipo de plantilla **Empty Activity**.
-3. En la Activity principal, reemplaza el texto por `"Hello Android"`.
-4. Inicia el **emulador Android** y ejecuta la app.
-
----
-
-## 📸 Evidencias (Capturas de Pantalla)
-
-Agrega aquí las capturas de pantalla que demuestren:
-
-- Android Studio instalado
-- Emulador Android ejecutando la app "Hello Android"
-- Terminal mostrando `java -version`, `mvn -v`, `git --version`, etc.
+- **Android Studio Instalado y Funcionando**  
+  <img src="Capturas/AndroidStudio.png" width="400"/>
+- **Java Development Kit (JDK)**  
+  <img src="Capturas/Java.png" width="400"/>  
+- **Maven**  
+  <img src="Capturas/Maven.png" width="400"/>  
+- **Git**  
+  <img src="Capturas/Git.png" width="400"/>  
+- **GitHub**  
+  <img src="Capturas/GitHub.png" width="400"/>
+  <img src="Capturas/Repositorio.png" width="400"/>  
+- **Docker**  
+  <img src="Capturas/Docker.png" width="400"/>    
+- **Node.js**  
+  <img src="Capturas/Node.png" width="400"/>    
+- **Flutter**  
+  <img src="Capturas/Flutter.png" width="400"/>
