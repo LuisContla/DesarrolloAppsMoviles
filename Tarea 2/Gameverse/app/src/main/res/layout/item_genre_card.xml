@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <!-- Glow para el efecto neón -->
+    <View
+        android:id="@+id/neonGlow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.0" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        style="@style/Widget.GameVerse.Card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentPadding="12dp"
+        app:strokeWidth="2dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="96dp">
+
+            <ImageView
+                android:id="@+id/imgArt"
+                android:layout_width="96dp"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:text="Género"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:textAlignment="center"
+                app:layout_constraintStart_toEndOf="@id/imgArt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</FrameLayout>
+

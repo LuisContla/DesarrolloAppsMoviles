@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.GameVerse.Toolbar.Primary" parent="Widget.Material3.Toolbar">
+        <!-- Fondo del toolbar -->
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="backgroundTint">?attr/colorPrimary</item>
+
+        <!-- Color de texto e iconos -->
+        <item name="titleTextColor">?attr/colorOnPrimary</item>
+        <item name="navigationIconTint">?attr/colorOnPrimary</item>
+    </style>
+    <!-- Borde, sin fondo, padding cómodo -->
+    <style name="Widget.GameVerse.Card" parent="Widget.Material3.CardView.Outlined">
+        <item name="cardBackgroundColor">@android:color/transparent</item>
+        <item name="strokeColor">?attr/colorOutline</item>
+        <item name="strokeWidth">1dp</item>
+
+        <!-- Compat padding y esquinas seguras -->
+        <item name="cardUseCompatPadding">true</item>
+        <item name="cardPreventCornerOverlap">true</item>
+    </style>
+</resources>

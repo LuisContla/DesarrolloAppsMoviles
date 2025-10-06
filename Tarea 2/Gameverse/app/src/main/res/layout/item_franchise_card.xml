@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        style="@style/Widget.GameVerse.Card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentPadding="0dp"
+        app:strokeWidth="2dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackgroundBorderless">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Imagen cuadrada con ratio 1:1 -->
+            <ImageView
+                android:id="@+id/imgArt"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- Título centrado en una franja inferior -->
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:background="#66000000"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:textAlignment="center"
+                app:layout_constraintStart_toStartOf="@id/imgArt"
+                app:layout_constraintEnd_toEndOf="@id/imgArt"
+                app:layout_constraintBottom_toBottomOf="@id/imgArt" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</FrameLayout>
+
