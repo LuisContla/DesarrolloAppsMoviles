@@ -2,9 +2,6 @@
 
 **GameVerse** — App Android con navegación jerárquica e identidad visual temática de **videojuegos**. Tres niveles (**Géneros → Franquicias → Juegos**) con **Activities** y **Fragments**, listas con **RecyclerView**, **transiciones** Material y **cambio de tema Claro/Oscuro** desde la Toolbar.
 
-> **Asignación**: navegación temática inmersiva con 3 niveles jerárquicos, UI creativa y transiciones no triviales.  
-> **Fecha límite**: **jueves 25 de septiembre de 2025**.
-
 ---
 
 ## 🗺️ Estructura jerárquica
