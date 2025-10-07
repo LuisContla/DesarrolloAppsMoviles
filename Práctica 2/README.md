@@ -124,7 +124,7 @@ app/src/main/java/com/example/gameverse/
 
 ---
 
-## 📸 Capturas (sugeridas)
+## 📸 Capturas
 
 - MainActivity
 

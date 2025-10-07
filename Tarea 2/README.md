@@ -138,10 +138,32 @@ res/layout/
 
 ---
 
-## 📸 Capturas (sugeridas)
+## 📸 Capturas
 
-- `docs/capturas/nivel1_generos.png` (Géneros)  
-- `docs/capturas/nivel2_franquicias.png` (Franquicias por género)  
-- `docs/capturas/nivel3_juegos.png` (Juegos por franquicia)  
-- `docs/capturas/detalle_juego.png` (Detalle con portada y cards)
+- MainActivity
+
+<p align="center">
+  <img src="Capturas/Main.png" alt="Juegos" width="420">
+</p>
+
+- FranchiseActivity
+
+<p align="center">
+  <img src="Capturas/Franchise.png" alt="Juegos" width="420">
+</p>
+
+
+- GamesActivity
+
+<p align="center">
+  <img src="Capturas/Games.png" alt="Juegos" width="420">
+</p>
+
+
+- GameActivity
+
+<p align="center">
+  <img src="Capturas/Game.png" alt="Juegos" width="420">
+</p>
+
 
