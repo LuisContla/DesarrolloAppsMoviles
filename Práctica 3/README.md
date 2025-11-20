@@ -1,258 +1,195 @@
-# Práctica 3 — Aplicaciones nativas (Android)
+# 📁 Gestor de Archivos (Jetpack Compose)
 
-**Alumno(a):** 🔧 _Tu nombre aquí_  
-**Boleta / Grupo:** 🔧 _Boleta y grupo_  
-**Asignatura:** Desarrollo de aplicaciones móviles nativas  
-**Profesor(a):** 🔧 _Nombre del profesor/a_  
-**Fecha de entrega:** **lunes 06 de octubre de 2025**
+## Descripción
+Aplicación académica desarrollada en **Kotlin + Jetpack Compose** para la materia de **Aplicaciones Móviles**.  
+Permite **explorar el almacenamiento** (vía SAF), abrir archivos de **texto** e **imágenes**, administrar elementos (crear carpeta, renombrar, eliminar, copiar/cortar/pegar) y **cambiar de tema** entre **Guinda (IPN)** y **Azul (ESCOM)** **en caliente** usando **DataStore**.
 
-> Este repositorio contiene las soluciones a la **Práctica 3** del curso, centradas en el desarrollo de **aplicaciones Android nativas** que interactúan con los recursos del dispositivo.  
-> **Incluye:**  
-> - **Ejercicio 1:** Gestor de archivos  
-> - **Ejercicio 2:** Aplicación de cámara y micrófono  
-> - *(Sin contenido del Ejercicio 3 en este documento).*
+La interfaz está construida con **Material 3**, navegación con **Navigation Compose** y estado con **ViewModel**.
 
 ---
 
-## Tabla de contenido
+## Características principales
+- 🗂️ **Explorador SAF**: selección de carpeta raíz y navegación por subdirectorios.
+- 🍞 **Breadcrumb** clicable para saltar a cualquier nivel de la ruta.
+- 📝 **Visor de texto** con scroll.
+- 🖼️ **Visor de imágenes** (Coil).
+- ⭐ **Favoritos** persistentes.
+- ➕ **Crear carpeta**, ✏️ **Renombrar**, 🗑️ **Eliminar**.
+- 📋 **Copiar / Cortar / Pegar** (mover emulado por copiar+eliminar).
+- 🎨 **Temas dinámicos**: Guinda (IPN) y Azul (ESCOM), con adaptación al modo claro/oscuro del sistema.
+- 🧭 **Navegación** declarativa con `NavHost`.
+- 💾 **Persistencia** con DataStore (tema, árbol raíz, favoritos).
+- ⚠️ Manejo básico de errores y restricciones de **Scoped Storage** (Android 10+).
 
-- [Objetivo de la práctica](#objetivo-de-la-práctica)  
-- [¿Qué es una aplicación nativa?](#qué-es-una-aplicación-nativa)  
-- [Estructura del repositorio](#estructura-del-repositorio)  
-- [Requisitos del sistema](#requisitos-del-sistema)  
-- [Instalación y ejecución](#instalación-y-ejecución)  
-- [Temas institucionales](#temas-institucionales)  
-- [Ejercicio 1 — Gestor de archivos](#ejercicio-1--gestor-de-archivos)  
-- [Ejercicio 2 — Cámara y micrófono](#ejercicio-2--cámara-y-micrófono)  
-- [Permisos requeridos y justificación](#permisos-requeridos-y-justificación)  
-- [Capturas de pantalla](#capturas-de-pantalla)  
-- [APK instalables](#apk-instalables)  
-- [Notas de arquitectura y buenas prácticas](#notas-de-arquitectura-y-buenas-prácticas)  
-- [Pruebas (resumen)](#pruebas-resumen)  
-- [Licencia](#licencia)
+> **Pendiente (roadmap):** búsqueda por nombre/tipo/fecha, miniaturas cacheadas, historial de recientes, previews de PDF, animaciones de transición y refinar mensajes de error.
 
 ---
 
-## Objetivo de la práctica
-
-Desarrollar **aplicaciones Android nativas** que utilicen **APIs y componentes del sistema** (cámara, micrófono, almacenamiento, MediaStore, etc.) y que sigan lineamientos de **Material Design**, **gestión de permisos en tiempo de ejecución** y **persistencia de datos**.
-
----
-
-## ¿Qué es una aplicación nativa?
-
-Una **aplicación nativa** se construye con las herramientas y lenguajes **oficiales de la plataforma** (Kotlin/Java + Android SDK), accediendo directamente a recursos del **hardware** y del **framework** (Activities, Fragments, Services, Room, DataStore, etc.). Se distribuye en **APK/AAB** y ofrece **máximo rendimiento** y acceso a funcionalidades del sistema.
+## Requisitos
+- **Android Studio Ladybug+** (o superior).
+- **Gradle JDK 17** (Settings → Gradle → *Gradle JDK* = 17).
+- **minSdk 24**, **target/compileSdk 34**.
+- Dispositivo o emulador con Android 7.0+ (recomendado Android 10+ por Scoped Storage).
 
 ---
 
-## Estructura del repositorio
+## Stack técnico
+- **Kotlin** 1.9.24
+- **Compose BOM** 2024.09.01 (Material 3 + UI)
+- **Navigation Compose** 2.8.0
+- **Lifecycle ViewModel Compose** 2.8.6
+- **DataStore Preferences** 1.1.1
+- **Coil Compose** 2.6.0
+- **DocumentFile** 1.0.1
 
-```
-/ (raíz)
-├─ ej1-file-manager/           # Proyecto Android - Gestor de archivos
-│  ├─ app/
-│  ├─ README.md                # (opcional) README específico del Ejercicio 1
-│  └─ ...
-├─ ej2-camera-audio/           # Proyecto Android - Cámara y micrófono
-│  ├─ app/
-│  ├─ README.md                # (opcional) README específico del Ejercicio 2
-│  └─ ...
-├─ apks/                       # APKs generados para entrega
-│  ├─ ej1-file-manager-release.apk
-│  └─ ej2-camera-audio-release.apk
-├─ screenshots/                # Evidencias (ver sección "Capturas de pantalla")
-│  ├─ ej1/
-│  └─ ej2/
-├─ docs/
-│  └─ informe-tecnico.pdf      # Informe técnico (PDF)
-└─ README.md                   # Este archivo
-```
+### Version Catalog (extracto sugerido de `libs.versions.toml`)
+```toml
+[versions]
+agp = "8.5.2"
+kotlin = "1.9.24"
+composeBom = "2024.09.01"
+navigationCompose = "2.8.0"
+lifecycle = "2.8.6"
+datastore = "1.1.1"
+coil = "2.6.0"
+documentfile = "1.0.1"
+coreKtx = "1.13.1"
+appcompat = "1.7.0"
+material = "1.12.0"
+activity = "1.9.2"
+constraintlayout = "2.1.4"
+junit = "4.13.2"
+junitVersion = "1.2.1"
+espressoCore = "3.6.1"
 
-> Cada subproyecto puede incluir su **README.md** con instrucciones específicas si lo deseas, pero **este documento único** concentra la información necesaria para la entrega de los **Ejercicios 1 y 2**.
+[libraries]
+compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
+compose-ui = { module = "androidx.compose.ui:ui" }
+compose-material3 = { module = "androidx.compose.material3:material3" }
+compose-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
+compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
+compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
+navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
+lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
+datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
+documentfile = { module = "androidx.documentfile:documentfile", version.ref = "documentfile" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
+junit = { module = "junit:junit", version.ref = "junit" }
+androidx-junit = { module = "androidx.test.ext:junit", version.ref = "junitVersion" }
+androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCore" }
 
----
-
-## Requisitos del sistema
-
-- **Android Studio:** 🔧 _Versión usada por ti (p. ej. Koala/Ladybug o superior)_  
-- **Android Gradle Plugin (AGP):** 🔧 _Ej. 8.x_  
-- **Gradle:** 🔧 _Ej. 8.x_  
-- **JDK:** 17  
-- **minSdk:** **24** (Android 7.0)  
-- **targetSdk / compileSdk:** 🔧 _Ej. 34 o superior_  
-- **Lenguaje:** Kotlin
-
-> Si usas versiones distintas, actualiza estos datos aquí y en los `build.gradle(.kts)` correspondientes.
-
----
-
-## Instalación y ejecución
-
-1. Clona el repositorio:
-   ```bash
-   git clone https://github.com/🔧tu-usuario/🔧tu-repo-practica-3.git
-   cd 🔧tu-repo-practica-3
-   ```
-2. Abre **Android Studio** y selecciona el subproyecto que quieras ejecutar:
-   - `ej1-file-manager/`
-   - `ej2-camera-audio/`
-3. **Sync Gradle** y **Run** en un **emulador** o **dispositivo físico**.
-4. Para generar **APK de release** en cada módulo:
-   ```bash
-   ./gradlew :app:assembleRelease
-   ```
-   El APK aparecerá en `app/build/outputs/apk/release/` del subproyecto.
-
----
-
-## Temas institucionales
-
-Los dos proyectos incluyen **temas personalizables** con adaptación a **modo claro/oscuro**:
-
-- **Tema Guinda (IPN):** `#6B2E5F`  
-- **Tema Azul (ESCOM):** `#003D6D`
-
-> La selección de tema se persiste con **DataStore/SharedPreferences** y se puede cambiar desde **Ajustes** in-app.
-
----
-
-## Ejercicio 1 — Gestor de archivos
-
-**Resumen:** Explorador de almacenamiento **interno/externo** con navegación jerárquica, vistas de lista/cuadrícula, miniaturas, apertura de archivos con **intents** y operaciones básicas.
-
-### Funcionalidades clave
-- Explorar directorios y visualizar estructura de **carpetas/archivos**  
-- Detalles: **nombre, tamaño, fecha, tipo**  
-- Apertura de **.txt, .md, .log, .json, .xml** in-app  
-- Visualización de **imágenes** con **zoom, desplazamiento y rotación**  
-- **Intents** para abrir tipos no soportados  
-- Gestión: **crear, renombrar, copiar, mover, eliminar**  
-- **Historial** y **favoritos** persistentes (Room/DataStore)  
-- **Búsqueda** por nombre/tipo/fecha  
-- **Caché de miniaturas** para rendimiento
-
-### Interfaz
-- Navegación con **breadcrumbs / barra de ruta**  
-- **Iconos** por tipo de archivo  
-- **Lista/cuadrícula** adaptable y **responsive**  
-- **Temas Guinda/Azul** + claro/oscuro
-
-### Almacenamiento y seguridad
-- Soporte a **Scoped Storage (Android 10+)**  
-- Uso de **MediaStore** y/o **Storage Access Framework (SAF)** cuando aplica  
-- Manejo de **excepciones** para rutas inaccesibles/archivos corruptos  
-- Respeto a restricciones de seguridad según versión
-
----
-
-## Ejercicio 2 — Cámara y micrófono
-
-**Resumen:** Captura de **fotos** (CameraX/Camera2) y **grabación de audio** (MediaRecorder), con **galería** y **reproductor** integrados.
-
-### Funcionalidades clave
-- **Cámara**: previsualización en tiempo real, **flash** (auto/on/off), **temporizador** (3/5/10s), **switch** frontal/trasera, **filtros** básicos (grises, sepia, brillo/contraste)  
-- **Audio**: **MediaRecorder**, nivel de audio en tiempo real, **iniciar/pausar/reanudar/detener**, temporizador configurable, selección de **calidad**  
-- **Gestión de archivos**: fotos **JPEG/PNG** con **EXIF**, audio **AAC/MP3/M4A**; guardado con **MediaStore** en colecciones adecuadas  
-- **Galería**: cuadrícula de miniaturas, visor con **gestos**, edición básica (recorte/rotación/ajustes), **compartir** por intents, info **EXIF**  
-- **Reproductor**: lista de grabaciones (duración/fecha), controles completos, **waveform**, renombrar/compartir/eliminar  
-- **Organización**: álbumes/categorías, etiquetas, búsqueda/ordenamiento, selección múltiple  
-- **UI/UX**: gestos y animaciones fluidas; feedback visual/sonoro/háptico; **Temas Guinda/Azul**
-
-### Persistencia
-- **MediaStore** para archivos multimedia  
-- **Room** para metadatos (fecha, ubicación, etiquetas, configuración)  
-- **Caché de miniaturas** y opciones de **exportar/compartir**
-
----
-
-## Permisos requeridos y justificación
-
-> Los permisos se solicitan **en tiempo de ejecución** y solo cuando son necesarios, con **mensajes de racional** (explicación) y manejo de **denegaciones permanentes**.
-
-### Ejercicio 1 — Gestor de archivos
-| Permiso | Android | ¿Para qué se usa? |
-|---|---|---|
-| `READ_MEDIA_IMAGES`, `READ_MEDIA_VIDEO`, `READ_MEDIA_AUDIO` | 13+ | Leer medios al generar miniaturas/galería y abrir archivos multimedia. |
-| `READ_EXTERNAL_STORAGE` | 12- | Lectura de archivos en almacenamiento compartido (pre-Android 13). |
-| `WRITE_EXTERNAL_STORAGE` | 28- | Operaciones de escritura en dispositivos antiguos (Android 9 o menor). |
-| **Sin permiso** (SAF: `ACTION_OPEN_DOCUMENT`/`TREE`) | 10+ | Acceso a archivos/carpeta elegida por el usuario sin permisos globales. |
-| `MANAGE_EXTERNAL_STORAGE` *(evitar)* | 11+ | Solo para casos “All files access”. **No se solicita** salvo demostración académica controlada. |
-
-> **Estrategia recomendada:** priorizar **SAF/MediaStore** y evitar `MANAGE_EXTERNAL_STORAGE`. En APIs modernas, usar `READ_MEDIA_*` en lugar de `READ_EXTERNAL_STORAGE`.
-
-### Ejercicio 2 — Cámara y micrófono
-| Permiso | Android | ¿Para qué se usa? |
-|---|---|---|
-| `CAMERA` | Todos | Capturar fotografías y previsualizar con CameraX/Camera2. |
-| `RECORD_AUDIO` | Todos | Grabar audio con MediaRecorder y mostrar nivel de entrada. |
-| `READ_MEDIA_IMAGES` | 13+ | Leer fotos para la galería/visor/edición. |
-| `READ_MEDIA_AUDIO` | 13+ | Leer grabaciones para el reproductor. |
-| `FOREGROUND_SERVICE_*` *(según versión)* | 14+ | Servicios en primer plano para captura/recording de larga duración con notificación persistente. |
-| `POST_NOTIFICATIONS` | 13+ | Mostrar notificaciones de progreso/estado (opcional). |
-
-> En Android 10+ el guardado de multimedia se hace vía **MediaStore** sin permisos de escritura global.
-
----
-
-## Capturas de pantalla
-
-Coloca las capturas en `./screenshots/ej1` y `./screenshots/ej2` con la siguiente convención:
-
-```
-screenshots/
-  ej1/
-    guinda_claro_*.png
-    guinda_oscuro_*.png
-    azul_claro_*.png
-    azul_oscuro_*.png
-  ej2/
-    guinda_claro_*.png
-    guinda_oscuro_*.png
-    azul_claro_*.png
-    azul_oscuro_*.png
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 ```
 
-> **Requisito:** incluir las **4 combinaciones** de tema/modo (Guinda claro/oscuro, Azul claro/oscuro) por cada ejercicio.
+---
+
+## Estructura del proyecto (paquetes)
+```
+com.example.actividad1
+│
+├─ MainActivity.kt
+│
+├─ data/
+│   └─ datastore/
+│      └─ PrefsRepository.kt
+│
+├─ domain/
+│   ├─ model/    ← FsItem, FsType
+│   └─ repo/     ← FileRepository, SafOps
+│
+├─ ui/
+│   ├─ navigation/   ← AppNavGraph.kt + Destinations
+│   ├─ components/   ← EmptyState, etc.
+│   ├─ screens/
+│   │   ├─ browser/      ← BrowserScreen, BrowserContent, FileItem, BrowserTopBar
+│   │   ├─ textviewer/   ← TextViewerScreen
+│   │   ├─ imageviewer/  ← ImageViewerScreen
+│   │   └─ settings/     ← SettingsScreen
+│   └─ theme/        ← Color.kt, Theme.kt, Typography.kt
+│
+└─ vm/
+    ├─ BrowserViewModel.kt
+    └─ TextViewerViewModel.kt
+```
 
 ---
 
-## APK instalables
-
-Los APK de entrega se encuentran en `./apks/` con nombres descriptivos:
-
-- `ej1-file-manager-release.apk`  
-- `ej2-camera-audio-release.apk`
-
-**Instalación (dispositivo físico):**
-1. Activa **Instalar apps de orígenes desconocidos**.  
-2. Copia el APK al dispositivo y ábrelo, o usa:
-   ```bash
-   adb install -r apks/ej1-file-manager-release.apk
-   adb install -r apks/ej2-camera-audio-release.apk
-   ```
+## Temas (Guinda / Azul) con recomposición
+- El **tema** se lee de `PrefsRepository.themeFlow` y se aplica en `AppTheme(prefs)`.
+- Al llamar `prefs.setTheme("guinda" | "azul")` desde `SettingsScreen`, **Compose recompone** la UI automáticamente.
+- Esquemas de color definidos en `ui/theme/Color.kt`:
+  - `LightGuindaScheme` / `DarkGuindaScheme`
+  - `LightAzulScheme` / `DarkAzulScheme`
 
 ---
 
-## Notas de arquitectura y buenas prácticas
-
-- **Patrón:** MVVM con capas **UI**, **Domain** y **Data**; **DI** con 🔧 _Hilt/Koin_ (según implementación).  
-- **Persistencia:** **Room** (metadatos), **DataStore** (preferencias/tema), **MediaStore** (multimedia).  
-- **UI:** **Material Design**, componentes **Jetpack** (Lifecycle, ViewModel, Navigation, Paging si aplica).  
-- **Rendimiento:** caché de miniaturas, cargas diferidas, uso de **coroutines/Flow**.  
-- **Permisos:** flujos de solicitud con **rationales** y manejo de **denegaciones permanentes** (enlace a ajustes).  
-- **Compatibilidad:** rutas separadas por **nivel de API** (p. ej. `READ_MEDIA_*` vs `READ_EXTERNAL_STORAGE`).  
-- **Calidad:** **lint**, **ktlint/Detekt** (opcional), comentarios en español en secciones complejas, nombres descriptivos.
+## Navegación
+Rutas principales en `AppNavGraph`:
+- `browser` → Explorador de archivos (pantalla principal).
+- `textviewer?uri={uri}` → Visor de texto.
+- `imageviewer?uri={uri}` → Visor de imágenes.
+- `settings` → Configuración de tema.
 
 ---
 
-## Pruebas (resumen)
+## SAF (Storage Access Framework)
+1. Al abrir por primera vez, toca **“Seleccionar carpeta”** para elegir el **árbol raíz**.
+2. La app guarda el permiso con `takePersistableUriPermission` y lo **recuerda** en `DataStore`.
+3. Desde el navegador:
+   - Tap en carpeta → entra.
+   - Tap en archivo de texto → se abre en el visor.
+   - Tap en imagen → visor de imágenes.
+   - Menú ⋮ del item → Copiar / Cortar / Renombrar / Eliminar.
+   - FAB: **Nueva carpeta** o **Pegar/Mover aquí** si hay contenido en el portapapeles.
 
-- **Dispositivos/Emuladores:** 🔧 _Modelo/Android X_, 🔧 _Modelo/Android Y_  
-- **Casos principales:**  
-  - **Ejercicio 1:** navegación de carpetas, operaciones (crear/mover/eliminar), apertura por intents, búsqueda/favoritos.  
-  - **Ejercicio 2:** captura con flash/temporizador, cambio de cámara, grabación pausar/reanudar, guardado en MediaStore, visor/galería, reproductor con waveform.  
-- **Permisos:** flujos de concesión/denegación (incluye **denegación permanente**) validados.  
-- **Rendimiento:** carga de miniaturas y scroll fluido en listas grandes.  
+> **Nota:** Mover = Copiar + Eliminar (limitación habitual con SAF).
 
-> El **informe técnico** detallado se entrega en `./docs/informe-tecnico.pdf` (fuera del alcance de este README).
+---
+
+## Build & Run
+1. Abre el proyecto en Android Studio.
+2. Verifica:
+   - `Gradle JDK = 17`
+   - `compileSdk/targetSdk = 34`, `minSdk = 24`
+3. **Sync Project** y ejecuta en emulador o dispositivo.
+4. Si tuviste un fallo de compilador IR: alinea `kotlin = 1.9.24` y `kotlinCompilerExtensionVersion = 1.5.14`.
+
+---
+
+## Troubleshooting
+- **“You need to use a Theme.Material3 theme…”**  
+  Asegúrate de que `android:theme="@style/Theme.Actividad1"` exista y herede de `Theme.Material3.DayNight.NoActionBar`.
+- **No carga el árbol raíz / `SecurityException`:**  
+  Vuelve a seleccionar la carpeta → el sistema te pedirá permisos.  
+- **No aparece “Pegar/Mover aquí”**:  
+  Primero usa **Copiar** o **Cortar** en el menú ⋮ de un elemento para llenar el portapapeles del ViewModel.
+- **Cambiar tema no surte efecto:**  
+  Verifica que estés invocando `AppTheme(prefs = PrefsRepository(context))` en `MainActivity` y que `SettingsScreen` llame `prefs.setTheme("guinda" | "azul")`.
+
+---
+
+## Roadmap (pendiente por completar)
+- 🔎 Búsqueda por nombre/tipo/fecha (con filtros).
+- 🖼️ Miniaturas con caché para imágenes.
+- 🧾 Historial de “recientes”.
+- 📄 Previsualización PDF / JSON / XML.
+- 🧼 Mejorar manejo de errores y snackbars con acciones (undo donde aplique).
+- ✨ Animaciones en navegación y en cambios de tema.
+
+---
+
+## 👤 Autor
+Desarrollado por **Escárcega Hernández Steven Arturo**  
+Aplicación académica con estética **cyberpunk** para **Aplicaciones Móviles**.
+
+---
+
 
