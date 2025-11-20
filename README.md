@@ -9,3 +9,5 @@ Repositorio donde se almacenarán todas las actividades del curso de Desarrollo 
  - [Práctica 1 - Instalación y Funcionamiento de los Entornos Móviles](./Práctica%201/)
  - [Práctica 2: Aplicación móvil básica](./Práctica%202/)
  - [Práctica 3: Aplicaciones nativas](./Práctica%203/)
+ - [Práctica 5: Consulta de base de datos vía API'S](./Práctica%205/)
+ - [Práctica 6: Manejo de sensores del dispositivo móvil](./Práctica%206/)
