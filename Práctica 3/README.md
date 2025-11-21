@@ -5,6 +5,7 @@ Aplicación académica desarrollada en **Kotlin + Jetpack Compose** para la mate
 Permite **explorar el almacenamiento** (vía SAF), abrir archivos de **texto** e **imágenes**, administrar elementos (crear carpeta, renombrar, eliminar, copiar/cortar/pegar) y **cambiar de tema** entre **Guinda (IPN)** y **Azul (ESCOM)** **en caliente** usando **DataStore**.
 
 La interfaz está construida con **Material 3**, navegación con **Navigation Compose** y estado con **ViewModel**.
+Permite **explorar el almacenamiento** (vía SAF), abrir archivos de **texto** e **imágenes**, administrar elementos y proteger el acceso mediante **seguridad biométrica**.
 
 ---
 
@@ -19,7 +20,8 @@ La interfaz está construida con **Material 3**, navegación con **Navigation Co
 - 🎨 **Temas dinámicos**: Guinda (IPN) y Azul (ESCOM), con adaptación al modo claro/oscuro del sistema.
 - 🧭 **Navegación** declarativa con `NavHost`.
 - 💾 **Persistencia** con DataStore (tema, árbol raíz, favoritos).
-- ⚠️ Manejo básico de errores y restricciones de **Scoped Storage** (Android 10+).
+- ⚠️ Manejo básico de errores y restricciones de **Scoped Storage** (Android 10+)
+- 🔒 **Seguridad Biométrica**: Bloqueo de aplicación mediante huella digital, reconocimiento facial o patrón/PIN del dispositivo..
 
 > **Pendiente (roadmap):** búsqueda por nombre/tipo/fecha, miniaturas cacheadas, historial de recientes, previews de PDF, animaciones de transición y refinar mensajes de error.
 
@@ -41,6 +43,7 @@ La interfaz está construida con **Material 3**, navegación con **Navigation Co
 - **DataStore Preferences** 1.1.1
 - **Coil Compose** 2.6.0
 - **DocumentFile** 1.0.1
+- **Biometric** 1.2.0-alpha05 (Autenticación)
 
 ### Version Catalog (extracto sugerido de `libs.versions.toml`)
 ```toml
@@ -95,7 +98,7 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 ```
 com.example.actividad1
 │
-├─ MainActivity.kt
+├─ MainActivity.kt   ← (Contiene lógica de BiometricPrompt y LockScreen)
 │
 ├─ data/
 │   └─ datastore/
@@ -107,7 +110,7 @@ com.example.actividad1
 │
 ├─ ui/
 │   ├─ navigation/   ← AppNavGraph.kt + Destinations
-│   ├─ components/   ← EmptyState, etc.
+│   ├─ components/   ← EmptyState, LockScreen, etc.
 │   ├─ screens/
 │   │   ├─ browser/      ← BrowserScreen, BrowserContent, FileItem, BrowserTopBar
 │   │   ├─ textviewer/   ← TextViewerScreen
@@ -183,3 +186,11 @@ Rutas principales en `AppNavGraph`:
 - 📄 Previsualización PDF / JSON / XML.
 - 🧼 Mejorar manejo de errores y snackbars con acciones (undo donde aplique).
 - ✨ Animaciones en navegación y en cambios de tema.
+
+## Notas de implementación
+### Seguridad
+El proyecto utiliza `androidx.biometric`. Al iniciar `MainActivity`, se verifica el estado de autenticación:
+1. Se muestra un estado de carga/bloqueo inicial.
+2. Se invoca `BiometricPrompt`.
+3. Si es exitoso (`onAuthenticationSucceeded`), se renderiza el `AppNavGraph`.
+4. Si falla o se cancela, se muestra una pantalla de `LockScreen` con botón de reintento.
