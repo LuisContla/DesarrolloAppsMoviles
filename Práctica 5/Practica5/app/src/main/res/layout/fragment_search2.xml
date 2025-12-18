@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:padding="12dp"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/etQuery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Buscar series (TVMaze)"/>
+
+    <RadioGroup
+        android:id="@+id/rgSource"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbTvMaze"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TVMaze"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/rbItems"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mi API"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Buscar"/>
+
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvResults"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+</LinearLayout>

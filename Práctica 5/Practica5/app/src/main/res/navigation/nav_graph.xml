@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.practica5.ui.home.HomeFragment"
+        android:label="Home"/>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.practica5.ui.search.SearchFragment"
+        android:label="Search"/>
+
+    <fragment
+        android:id="@+id/itemsFragment"
+        android:name="com.example.practica5.ui.items.ItemsFragment"
+        android:label="Mi API" />
+
+    <fragment
+        android:id="@+id/recoFragment"
+        android:name="com.example.practica5.ui.reco.RecoFragment"
+        android:label="Reco"/>
+
+    <fragment
+        android:id="@+id/adminFragment"
+        android:name="com.example.practica5.ui.admin.AdminFragment"
+        android:label="Admin"/>
+
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.practica5.ui.favorites.FavoritesFragment"
+        android:label="Favoritos" />
+
+</navigation>

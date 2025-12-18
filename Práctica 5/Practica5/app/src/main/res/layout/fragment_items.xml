@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvItemsStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mi API (offline-first)"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+
+        <EditText
+            android:id="@+id/etQ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Buscar (q) en título/desc" />
+
+        <EditText
+            android:id="@+id/etCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Categoría exacta (ej: Series)" />
+
+        <EditText
+            android:id="@+id/etMinRating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Rating mínimo (ej: 4.5)"
+            android:inputType="numberDecimal"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ordenar por:"
+            android:paddingTop="8dp"/>
+
+        <Spinner
+            android:id="@+id/spSort"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btnItemsRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aplicar filtros (Backend -> Room)"
+            android:paddingTop="6dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvItems"
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:paddingTop="10dp"/>
+
+    </LinearLayout>
+</ScrollView>
