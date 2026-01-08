@@ -12,4 +12,6 @@ Repositorio donde se almacenarán todas las actividades del curso de Desarrollo 
  - [Práctica 3 - Aplicaciones nativas](./Práctica%203/)
  - [Práctica 5 - Consulta de Base de Datos vía APIs](./Práctica%205/)
  - [Práctica 6 - Manejo de sensores del dispositivo móvil](./Práctica%206/)
+ 
+ - [Práctica 7.- Desarrollo de una aplicación que consuma servicios en la nube](./Práctica%207/)
  - [Práctica 9 - Aplicaciones para vestibles](./Práctica%209/)
