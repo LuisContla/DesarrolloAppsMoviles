@@ -67,6 +67,25 @@ Desarrollar una aplicación móvil que:
 ## 📶 Funcionalidad sin conexión
 La app permite visualizar búsquedas, favoritos, recomendaciones y datos sincronizados sin conexión a internet.
 
+## 📸 Capturas
+
+<p align="center">
+  <img src="Capturas/Vista1.jpg" alt="Géneros" width="48%">
+  <img src="Capturas/Vista2.jpg" alt="Franquicias" width="48%">
+</p>
+<p align="center">
+  <img src="Capturas/Vista3.jpg" alt="Géneros" width="48%">
+  <img src="Capturas/Vista4.jpg" alt="Franquicias" width="48%">
+</p>
+<p align="center">
+  <img src="Capturas/Vista5.jpg" alt="Géneros" width="48%">
+  <img src="Capturas/Vista6.jpg" alt="Franquicias" width="48%">
+</p>
+<p align="center">
+  <img src="Capturas/Vista7.jpg" alt="Géneros" width="48%">
+  <img src="Capturas/Vista8.jpg" alt="Franquicias" width="48%">
+</p>
+
 ## 📚 Conclusiones
 Este proyecto permitió integrar múltiples conceptos del desarrollo móvil moderno, como consumo de APIs, persistencia local, control de roles, sincronización de datos y diseño de interfaces reactivas.
 Además, se reforzó el uso de buenas prácticas como separación de responsabilidades y manejo de errores de red.
